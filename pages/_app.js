@@ -1,7 +1,32 @@
-import '../styles/globals.css'
+import React, { useState } from "react";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+import { ChakraProvider } from "@chakra-ui/react";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-export default MyApp
+
+import "../styles/globals.css";
+
+// TODO: Layout Component
+// TODO: Wrap providers
+
+const App = ({ Component, pageProps }) => {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+          },
+        },
+      })
+  );
+  return (
+    <ChakraProvider>
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
+    </ChakraProvider>
+  );
+};
+
+export default App;
