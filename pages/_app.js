@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
-
 import "../styles/globals.css";
+import Layout from "components/layout";
 
 // TODO: Layout Component
+
 // TODO: Wrap providers
 
 const App = ({ Component, pageProps }) => {
@@ -21,11 +22,9 @@ const App = ({ Component, pageProps }) => {
       })
   );
   return (
-    <ChakraProvider>
-      <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
-      </QueryClientProvider>
-    </ChakraProvider>
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
   );
 };
 
