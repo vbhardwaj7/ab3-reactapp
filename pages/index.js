@@ -1,8 +1,12 @@
-import Head from "next/head";
-// import Image from 'next/image'
+import DashboardContainer from "containers/dashboard";
+import Page from "components/layout/Page";
 
-const Dashboard = props => {
-  return <div>Hey from Dashbaord page.....</div>;
+const DashboardPage = props => {
+  return (
+    <Page>
+      <DashboardContainer />
+    </Page>
+  );
 };
 
-export default Dashboard;
+export default DashboardPage;

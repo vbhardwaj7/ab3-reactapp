@@ -1,0 +1,47 @@
+things to ask
+1. Description should be string
+2. Currency Format
+3. Is data updated 
+4. CORS 
+5. How likes are going to work?
+
+
+
+
+Authentication Flow
+- 
+
+
+
+octank.click
+
+
+clientId
+
+respontype token i id token and 
+
+
+
+
+
+
+URL has tokens 
+
+
+id_token
+
+
+access_token --- mandarory
+
+
+Authorizer= access_token 
+
+
+
+
+token Type = berare
+
+
+
+Login page to dashboard 
+
