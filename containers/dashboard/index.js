@@ -1,5 +1,4 @@
-import { useState } from "react";
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { DealCard } from "components/cards";
@@ -29,7 +28,7 @@ const DealOfDaySection = ({ deals }) => {
       : 12;
   const getNumberOfCards = () =>
     isDesktopDeviceAndUp
-      ? 4
+      ? 5
       : isMediumDeviceAndUp
       ? 2
       : isWidthMoreThan550px
@@ -96,7 +95,7 @@ const SingleCategoryDealsSection = ({ categoryName, list }) => {
       : 12;
   const getNumberOfCards = () =>
     isDesktopDeviceAndUp
-      ? 4
+      ? 5
       : isMediumDeviceAndUp
       ? 2
       : isWidthMoreThan550px
@@ -161,7 +160,7 @@ const CategoriesSection = ({ categories }) => {
       : 12;
   const getNumberOfCards = () =>
     isDesktopDeviceAndUp
-      ? 4
+      ? 5
       : isMediumDeviceAndUp
       ? 2
       : isWidthMoreThan550px

@@ -25,6 +25,7 @@ const Card = props => (
     background="white"
     px={4}
     py={4}
+    cursor="pointer"
     {...props}
   />
 );

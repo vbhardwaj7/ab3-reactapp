@@ -56,7 +56,14 @@ const Footer = () => {
   );
 };
 // Styles
-const Main = props => <chakra.main {...props} />;
+const Main = props => (
+  <chakra.main
+    py={12}
+    bg="rgb(250, 250, 250)"
+    minH="calc(100vh - 104px)"
+    {...props}
+  />
+);
 
 const DashboardWrapper = ({ children }) => {
   return (

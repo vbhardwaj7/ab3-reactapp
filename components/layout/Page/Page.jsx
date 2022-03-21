@@ -5,8 +5,8 @@ import { Container, Heading, Box } from "@chakra-ui/react";
 
 const Page = ({ title, children }) => {
   return (
-    <Box py={12} bg="rgb(250, 250, 250)">
-      <Container maxW="container.md">
+    <Box >
+      <Container maxW="container.lg">
         {!!title && <Heading textAlign="center">{title}</Heading>}
         {children}
       </Container>
