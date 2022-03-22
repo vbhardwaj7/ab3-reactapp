@@ -6,12 +6,14 @@ import {
   Flex,
   Heading,
   IconButton,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MdFlight } from "react-icons/md";
 import { ImUser, ImSearch } from "react-icons/im";
+import { SearchDealModal } from "components/features";
 
-const TopBar = () => {
+const TopBar = ({ onOpen }) => {
   return (
     <Flex
       px="8"
@@ -42,6 +44,7 @@ const TopBar = () => {
           isRound
           aria-label="User"
           icon={<ImSearch color="white" />}
+          onClick={onOpen}
         />
       </Flex>
     </Flex>
@@ -66,9 +69,12 @@ const Main = props => (
 );
 
 const DashboardWrapper = ({ children }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
-      <TopBar />
+      <TopBar onOpen={onOpen} />
+      <SearchDealModal isOpen={isOpen} onClose={onClose} />
       <Main>{children}</Main>
       <Footer />
     </>

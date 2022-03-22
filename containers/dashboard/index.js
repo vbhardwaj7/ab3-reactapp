@@ -2,7 +2,16 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { DealCard } from "components/cards";
-import { Heading, IconButton, useMediaQuery, useTheme } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  IconButton,
+  Skeleton,
+  SkeletonCircle,
+  Text,
+  useMediaQuery,
+  useTheme,
+} from "@chakra-ui/react";
 import ItemsCarousel from "react-items-carousel";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
@@ -10,6 +19,7 @@ const Section = () => {
   // TODO: Section Component
   return <div>Hey from Section...</div>;
 };
+
 
 const DealOfDaySection = ({ deals }) => {
   const [activeItemIndex, setActiveItemIndex] = useState(0);
