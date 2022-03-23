@@ -35,20 +35,9 @@ const TopBar = ({ onOpen }) => {
       justifyContent="space-between"
     >
       <Flex>
-        <MdFlight
-          cursor="pointer"
-          onClick={goToHomePage}
-          fontSize="24px"
-          color="white"
-        />
-        <Heading
-          cursor="pointer"
-          onClick={goToHomePage}
-          ml="2"
-          size="md"
-          color="white"
-        >
-          We Fly
+        <MdFlight onClick={goToHomePage} fontSize="24px" color="white" />
+        <Heading onClick={goToHomePage} ml="2" size="md" color="white">
+          Octank Airlines Loyalty Program!
         </Heading>
       </Flex>
       <Flex>
@@ -77,7 +66,7 @@ const TopBar = ({ onOpen }) => {
 const Footer = () => {
   return (
     <Flex h="12" bgColor="blue.50" alignItems="center" justifyContent="center">
-      © 2022 We Fly. All rights reserved.
+      © 2022 Octank Airlines Loyalty Program. All rights reserved.
     </Flex>
   );
 };
