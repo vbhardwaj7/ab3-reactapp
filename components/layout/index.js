@@ -12,8 +12,19 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { MdFlight } from "react-icons/md";
 import { ImSearch, ImCart } from "react-icons/im";
 import { SearchDealModal } from "components/features";
+import { useRouter } from "next/router";
 
 const TopBar = ({ onOpen }) => {
+  const { push } = useRouter();
+
+  const goToHomePage = () => {
+    push(`/`);
+  };
+
+  const goToOrders = () => {
+    push(`/order`);
+  };
+
   return (
     <Flex
       px="8"
@@ -24,8 +35,19 @@ const TopBar = ({ onOpen }) => {
       justifyContent="space-between"
     >
       <Flex>
-        <MdFlight fontSize="24px" color="white" />
-        <Heading ml="2" size="md" color="white">
+        <MdFlight
+          cursor="pointer"
+          onClick={goToHomePage}
+          fontSize="24px"
+          color="white"
+        />
+        <Heading
+          cursor="pointer"
+          onClick={goToHomePage}
+          ml="2"
+          size="md"
+          color="white"
+        >
           We Fly
         </Heading>
       </Flex>
@@ -37,6 +59,7 @@ const TopBar = ({ onOpen }) => {
           aria-label="User"
           icon={<ImCart color="white" />}
           mr="1"
+          onClick={goToOrders}
         />
         <IconButton
           variant="ghost"

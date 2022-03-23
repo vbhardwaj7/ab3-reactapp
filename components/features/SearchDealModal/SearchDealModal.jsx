@@ -19,6 +19,7 @@ import useDebounce from "hooks/use-debounce";
 import { ImSearch } from "react-icons/im";
 import { useQuery } from "react-query";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const List = ({ children }) => {
   return (
@@ -37,11 +38,11 @@ const Row = ({
   index,
   handleItemClick,
 }) => {
-  const { itemTitle } = data;
+  const { itemTitle, itemId } = data;
   console.log({ isActive, index });
 
   const handleClick = () => {
-    handleItemClick(data);
+    handleItemClick(itemId);
   };
 
   const handleMouseEnter = () => {
@@ -77,7 +78,7 @@ const searchDeals = async searchInput => {
   // TODO: Use Search Input
   return axios
     .post(`https://api.octank.click/searchitems`)
-    .then(({ data: { itemsByCategory } }) => itemsByCategory);
+    .then(({ data: { searchResults } }) => searchResults);
 };
 
 const useSearchDeals = searchInput => {
@@ -90,6 +91,7 @@ const SearchDealModal = ({ isOpen, onClose }) => {
   const [input, setInput] = useState("");
   const debouncedSearch = useDebounce(input, 500);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const { push } = useRouter();
 
   const { data, isLoading } = useSearchDeals(debouncedSearch);
 
@@ -99,7 +101,10 @@ const SearchDealModal = ({ isOpen, onClose }) => {
     setInput(e.target.value);
   };
 
-  const handleItemClick = () => {};
+  const handleItemClick = itemId => {
+    push(`/deal/${itemId}`);
+    onClose();
+  };
 
   const handleKeyDown = e => {
     if (isLoading || !data || !data.length) {
@@ -142,7 +147,7 @@ const SearchDealModal = ({ isOpen, onClose }) => {
           onSubmit={e => {
             e.preventDefault();
             if (activeIndex !== -1) {
-              handleItemClick(data[activeIndex]);
+              handleItemClick(data[activeIndex]?.itemId);
             }
           }}
         >
@@ -182,7 +187,7 @@ const SearchDealModal = ({ isOpen, onClose }) => {
                   data={deal}
                   isLoading={isLoading}
                   handleItemClick={handleItemClick}
-                  //   onClose={onClose}
+                  // onClose={onClose}
                   isActive={activeIndex === index}
                   setActiveIndex={setActiveIndex}
                   index={index}

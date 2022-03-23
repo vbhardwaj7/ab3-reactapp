@@ -25,14 +25,14 @@ const OrdersContainer = () => {
     return <>Loading...</>;
   }
 
-  console.log({ data });
+  // console.log({ data });
 
   return (
     <Box>
       <Heading align="center">Orders</Heading>
       <List>
-        {(data || []).map(card => (
-          <OrderOverviewCard key={card.orderId} data={card} />
+        {(data || []).map((card, index) => (
+          <OrderOverviewCard key={`${index}-${card.orderId}`} data={card} />
         ))}
       </List>
     </Box>

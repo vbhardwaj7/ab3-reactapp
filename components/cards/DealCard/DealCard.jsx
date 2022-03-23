@@ -1,6 +1,7 @@
 import React from "react";
 import { Image } from "components/data-display";
 import { Flex, Box, Heading, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 /* 
 dealCategory: "Electronics"
@@ -35,8 +36,18 @@ const CardImageContainer = props => (
 const ContentContainer = props => <Box {...props} />;
 
 const DealCard = ({ deal, isCategory = false }) => {
+  const { push } = useRouter();
+  // TODO: redirect to required card
+  const redirectToSingleDealPage = () => {
+    if (isCategory) {
+      push(`/category/${deal.categoryId}`);
+    } else {
+      push(`/deal/${deal.itemId}`);
+    }
+  };
+  console.log({ deal });
   return (
-    <Card>
+    <Card onClick={redirectToSingleDealPage}>
       <CardImageContainer>
         <Image
           src={deal["imgUrl "]}

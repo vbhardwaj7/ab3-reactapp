@@ -7,27 +7,27 @@ import { Image } from "components/data-display";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 // TODO: API: integrate single deal API handler
-const getItemDetails = dealId =>
-  // TODO: API: remove mock data
-  axios.post(`https://api.octank.click/getitemdetails`).then(({ data }) => ({
-    dealCategory: "Office Products",
-    dealId: "01BX5ZZKBKACTAV9WEVGEMMVRY",
-    dealPrice: "3",
-    dealTitle: "35% off on Paper",
-    "imgUrl ":
-      "https://images-na.ssl-images-amazon.com/images/I/71XrK2g-BlL._AC._SR360,460.jpg",
-    itemId: "8",
-    originalPrice: "5",
-    likesCount: "300",
-    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit voluptate eos odio ex sequi dolorum fuga ut incidunt dolorem minus enim saepe quam exercitationem eligendi, reiciendis quos, aperiam quasi optio.
-    Illo maiores deserunt, error ex delectus, eum quidem quibusdam doloremque omnis necessitatibus inventore! Aperiam maxime ad fugit dolorem perferendis aut! Ut, labore facere? Officiis, dolorum doloremque unde quod suscipit nulla?
-    Sint quo maxime commodi cum numquam autem sequi atque illum ipsum dolores illo culpa perspiciatis quam animi voluptatem libero, fugit neque quos sed voluptates recusandae minus voluptatum tenetur. Iste, natus!`,
-  }));
+// TODO: API: remove mock data
+const getItemDetails = itemId =>
+  axios
+    .post(`https://api.octank.click/getitemdetails`, { itemId })
+    .then(({ data }) => ({
+      itemId: "28",
+      itemTitle: "Item Title 28",
+      itemDesc:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+      "imgUrl ":
+        "https://m.media-amazon.com/images/I/71eGb1FcyiL._AC_SL1500_.jpg",
+      originalPrice: "5",
+      dealPrice: "3",
+      itemCategory: "Office",
+      itemLikeCount: "300",
+    }));
 
 // TODO: API: integrate single deal API hook
-const useGetItemDetails = dealId => {
-  return useQuery(["deal", dealId], () => getItemDetails(dealId), {
-    enabled: !!dealId,
+const useGetItemDetails = itemId => {
+  return useQuery(["deal", itemId], () => getItemDetails(itemId), {
+    enabled: !!itemId,
   });
 };
 
@@ -38,10 +38,10 @@ const CardImageContainer = props => (
 const SingleDealContainer = () => {
   // TODO: get deal id from URL
   const {
-    query: { dealId },
+    query: { itemId },
   } = useRouter();
 
-  const { data, error, isLoading } = useGetItemDetails(dealId);
+  const { data, error, isLoading } = useGetItemDetails(itemId);
   console.log({ data, isLoading });
 
   // UI: create product image image UI
@@ -60,22 +60,22 @@ const SingleDealContainer = () => {
       <CardImageContainer>
         <Image
           src={data?.["imgUrl "]}
-          alt={data?.dealTitle}
+          alt={data?.itemTitle}
           width="100%"
           height="100%"
         />
       </CardImageContainer>
       <Flex mb="12" justify="flex-end">
         <Button colorScheme="blue" leftIcon={<AiOutlineHeart />}>
-          {data?.likesCount}
+          {data?.itemLikeCount}
         </Button>
       </Flex>
       <VStack align="flex-start">
         <Text mb="-2" color="blue.600">
-          {data?.dealCategory}
+          {data?.itemCategory}
         </Text>
-        <Heading size="2xl">{data?.dealTitle}</Heading>
-        <Text>{data?.description}</Text>
+        <Heading size="2xl">{data?.itemTitle}</Heading>
+        <Text>{data?.itemDesc}</Text>
       </VStack>
     </VStack>
   );

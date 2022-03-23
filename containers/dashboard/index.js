@@ -20,7 +20,6 @@ const Section = () => {
   return <div>Hey from Section...</div>;
 };
 
-
 const DealOfDaySection = ({ deals }) => {
   const [activeItemIndex, setActiveItemIndex] = useState(0);
 
@@ -152,6 +151,7 @@ const SingleCategoryDealsSection = ({ categoryName, list }) => {
   );
 };
 const CategoriesSection = ({ categories }) => {
+  console.log({ categories });
   // TODO: Browse products by category
   console.log({ categories });
   const [activeItemIndex, setActiveItemIndex] = useState(0);
@@ -214,7 +214,9 @@ const CategoriesSection = ({ categories }) => {
               deal={{
                 "imgUrl ": deal["categoryImageURL"],
                 dealTitle: deal.dealCategory,
+                categoryId: deal.categoryId,
               }}
+              isCategory
             />
           ))}
         </ItemsCarousel>
