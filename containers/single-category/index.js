@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Flex, Heading, Box } from "@chakra-ui/react";
+import { Flex, Heading, Box, HStack, Button } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { DealCard } from "components/cards";
@@ -31,6 +31,8 @@ const SingleCategoryContainer = () => {
 
   // use category to get deals for that category
   const { data, error, isLoading } = useGetCategoryDeals(categoryId);
+  const ITEMS_PER_PAGE = 10;
+  const [page, setPage] = useState(1);
 
   // TODO: API: later add pagination
 
@@ -46,7 +48,7 @@ const SingleCategoryContainer = () => {
     return <>Loading...</>;
   }
 
-  console.log({ data });
+  console.log({ data, m: page * ITEMS_PER_PAGE });
 
   //  UI: Category Dynamic Heading
   //  create grid for products listing
@@ -54,12 +56,32 @@ const SingleCategoryContainer = () => {
     <>
       <Heading align="center">{data ? data[0].dealCategory : ""}</Heading>
       <Flex wrap="wrap" my={12}>
-        {(data || []).map((deal, index) => (
-          <Box m={2} key={index}>
-            <DealCard deal={{ ...deal, dealTitle: deal.itemTitle }} />
-          </Box>
-        ))}
+        {(data || [])
+          .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)
+          .map((deal, index) => (
+            <Box m={2} key={index}>
+              <DealCard deal={{ ...deal, dealTitle: deal.itemTitle }} />
+            </Box>
+          ))}
       </Flex>
+      <HStack justifyContent="center">
+        <Button
+          isDisabled={page === 1}
+          onClick={() => {
+            setPage(p => p - 1);
+          }}
+        >
+          Previous
+        </Button>
+        <Button
+          onClick={() => {
+            setPage(p => p + 1);
+          }}
+          isDisabled={page * ITEMS_PER_PAGE > data?.length}
+        >
+          Next
+        </Button>
+      </HStack>
     </>
   );
 };
