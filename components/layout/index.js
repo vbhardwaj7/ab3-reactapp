@@ -26,7 +26,7 @@ const TopBar = ({ onOpen }) => {
       <Flex>
         <MdFlight fontSize="24px" color="white" />
         <Heading ml="2" size="md" color="white">
-          Octank Airlines Loyalty Program
+          Octank Airlines Loyalty Program!
         </Heading>
       </Flex>
       <Flex>
