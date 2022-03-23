@@ -57,3 +57,32 @@ Login page to dashboard
 Things to do:
 1. Check for 401 response
 2. 
+
+
+ - client side pagination
+ - Authenticate
+ - Handle 401 for API calls
+ - Store & Attach Auth header to all APIs
+ - Have a common loader
+ - Fix cross number
+
+
+ - add all redirections and flow checks - 4
+
+
+ - remove stale data and have new data everywhere
+ - add id's and names in API calls
+
+
+ - add constants for BASE_URL and company name 
+
+
+
+
+ Things to ask
+ 1. Quantity missing in order details
+2. Ask for exact params in API calls
+3. Check and inform about inconsistent data
+
+
+- PROTECTED API 

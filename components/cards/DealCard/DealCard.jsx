@@ -43,7 +43,6 @@ const DealCard = ({ deal, isCategory = false }) => {
           alt={deal.dealTitle}
           width="100%"
           height="100%"
-          objectFit="contain"
         />
       </CardImageContainer>
       <ContentContainer>
@@ -60,19 +59,21 @@ const DealCard = ({ deal, isCategory = false }) => {
                   position: "absolute",
                   width: "20px",
                   height: "1px",
-                  background: "gray.600",
+                  background: "red.600",
                   bottom: "5px",
                   transform: "rotate(-45deg)",
                   transformOrigin: "bottom left",
                 }}
-                color="gray.400"
+                color="red.400"
                 // textDecoration="line-through"
                 fontSize="lg"
               >
                 {deal.originalPrice}&nbsp;
               </Text>
             </Box>
-            <Text fontSize="lg">{deal.dealPrice}</Text>
+            <Text fontSize="lg" color="green">
+              {deal.dealPrice}
+            </Text>
           </Flex>
         )}
       </ContentContainer>

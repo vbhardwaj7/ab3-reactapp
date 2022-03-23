@@ -63,7 +63,6 @@ const SingleDealContainer = () => {
           alt={data?.dealTitle}
           width="100%"
           height="100%"
-          objectFit="contain"
         />
       </CardImageContainer>
       <Flex mb="12" justify="flex-end">

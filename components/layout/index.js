@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MdFlight } from "react-icons/md";
-import { ImUser, ImSearch } from "react-icons/im";
+import { ImSearch, ImCart } from "react-icons/im";
 import { SearchDealModal } from "components/features";
 
 const TopBar = ({ onOpen }) => {
@@ -35,7 +35,7 @@ const TopBar = ({ onOpen }) => {
           colorScheme="whiteAlpha"
           isRound
           aria-label="User"
-          icon={<ImUser color="white" />}
+          icon={<ImCart color="white" />}
           mr="1"
         />
         <IconButton
