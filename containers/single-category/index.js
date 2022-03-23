@@ -31,7 +31,7 @@ const SingleCategoryContainer = () => {
 
   // use category to get deals for that category
   const { data, error, isLoading } = useGetCategoryDeals(categoryId);
-  const ITEMS_PER_PAGE = 10;
+  const ITEMS_PER_PAGE = 12;
   const [page, setPage] = useState(1);
 
   // TODO: API: later add pagination

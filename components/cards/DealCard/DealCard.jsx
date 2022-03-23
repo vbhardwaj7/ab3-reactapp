@@ -61,29 +61,17 @@ const DealCard = ({ deal, isCategory = false }) => {
           {deal.dealTitle}
         </Heading>
         {deal.originalPrice && (
-          <Flex>
-            <Box position="relative">
-              <Text
-                // position="absolute"
-                _before={{
-                  content: '""',
-                  position: "absolute",
-                  width: "20px",
-                  height: "1px",
-                  background: "red.600",
-                  bottom: "5px",
-                  transform: "rotate(-45deg)",
-                  transformOrigin: "bottom left",
-                }}
-                color="red.400"
-                // textDecoration="line-through"
-                fontSize="lg"
-              >
-                {deal.originalPrice}&nbsp;
-              </Text>
-            </Box>
-            <Text fontSize="lg" color="green">
-              {deal.dealPrice}
+          <Flex alignItems="flex-end">
+            <Text
+              mb="1px"
+              color="gray.400"
+              textDecoration="line-through"
+              fontSize="md"
+            >
+              &nbsp;{deal.originalPrice}&nbsp;
+            </Text>
+            <Text mb="0" fontWeight="medium" color="blue.300" fontSize="lg">
+              &nbsp;{deal.dealPrice}
             </Text>
           </Flex>
         )}

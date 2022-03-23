@@ -35,8 +35,19 @@ const TopBar = ({ onOpen }) => {
       justifyContent="space-between"
     >
       <Flex>
-        <MdFlight onClick={goToHomePage} fontSize="24px" color="white" />
-        <Heading onClick={goToHomePage} ml="2" size="md" color="white">
+        <MdFlight
+          onClick={goToHomePage}
+          fontSize="24px"
+          color="white"
+          cursor="pointer"
+        />
+        <Heading
+          onClick={goToHomePage}
+          ml="2"
+          size="md"
+          color="white"
+          cursor="pointer"
+        >
           Octank Airlines Loyalty Program!
         </Heading>
       </Flex>
