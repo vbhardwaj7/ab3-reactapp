@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MdFlight } from "react-icons/md";
-import { ImSearch, ImCart } from "react-icons/im";
+import { ImSearch, ImCart, ImUser } from "react-icons/im";
 import { SearchDealModal } from "components/features";
 import { useRouter } from "next/router";
 
@@ -23,6 +23,10 @@ const TopBar = ({ onOpen }) => {
 
   const goToOrders = () => {
     push(`/order`);
+  };
+
+  const goToProfile = () => {
+    push(`/user/profile`);
   };
 
   return (
@@ -57,6 +61,15 @@ const TopBar = ({ onOpen }) => {
           colorScheme="whiteAlpha"
           isRound
           aria-label="User"
+          icon={<ImUser color="white" />}
+          mr="1"
+          onClick={goToProfile}
+        />
+        <IconButton
+          variant="ghost"
+          colorScheme="whiteAlpha"
+          isRound
+          aria-label="Orders"
           icon={<ImCart color="white" />}
           mr="1"
           onClick={goToOrders}

@@ -45,7 +45,7 @@ const DealCard = ({ deal, isCategory = false }) => {
       push(`/deal/${deal.itemId}`);
     }
   };
-  console.log({ deal });
+  // console.log({ deal });
   return (
     <Card onClick={redirectToSingleDealPage}>
       <CardImageContainer>

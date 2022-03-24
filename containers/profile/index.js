@@ -1,8 +1,17 @@
 import React from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { Box, Heading, HStack, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { BASE_API_URL } from "utils/constants";
+import { useRouter } from "next/router";
 
 const getUserProfile = () => {
   // TODO: implement access token...
@@ -16,7 +25,13 @@ const useGetUserProfile = () => {
 const ProfileContainer = () => {
   const { data, isLoading } = useGetUserProfile();
 
-  console.log({ data, isLoading });
+  const { push } = useRouter();
+
+  const handleLoggedInUsersClick = () => {
+    push(`/user/sessions`);
+  };
+
+  // console.log({ data, isLoading });
 
   if (isLoading) {
     return <>Loading...</>;
@@ -25,7 +40,7 @@ const ProfileContainer = () => {
   return (
     <Box>
       <Heading align="center">User Profile</Heading>
-      <Box my="20" mx="auto" maxW="container.md">
+      <VStack spacing="4" align="center" my="28" mx="auto" maxW="container.md">
         <VStack align="flex-start">
           <HStack align="flex-start">
             <Text fontWeight="bold" align="left" w="80">
@@ -64,7 +79,12 @@ const ProfileContainer = () => {
             <Text align="left">{data?.address[1]?.businessAddress}</Text>
           </HStack>
         </VStack>
-      </Box>
+      </VStack>
+      <Flex justifyContent="center">
+        <Button size="sm" onClick={handleLoggedInUsersClick} colorScheme="blue">
+          View Logged in Users
+        </Button>
+      </Flex>
     </Box>
   );
 };

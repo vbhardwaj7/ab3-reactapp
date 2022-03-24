@@ -27,7 +27,7 @@ const DealOfDaySection = ({ deals }) => {
   const isWidthMoreThan550px = useMediaQuery("(min-width: 550px)");
   const isMediumDeviceAndUp = useMediaQuery("(min-width: 768px)");
   const isDesktopDeviceAndUp = useMediaQuery("(min-width: 1024px)");
-  console.log({ deals });
+  // console.log({ deals });
   const getChevronWidth = () =>
     isDesktopDeviceAndUp
       ? 60
@@ -88,13 +88,13 @@ const DealOfDaySection = ({ deals }) => {
 
 const SingleCategoryDealsSection = ({ categoryName, list }) => {
   // TODO: Single Category Deals
-  console.log({ categoryName }, list);
+  // console.log({ categoryName }, list);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
 
   const isWidthMoreThan550px = useMediaQuery("(min-width: 550px)");
   const isMediumDeviceAndUp = useMediaQuery("(min-width: 768px)");
   const isDesktopDeviceAndUp = useMediaQuery("(min-width: 1024px)");
-  console.log({ list });
+  // console.log({ list });
   const getChevronWidth = () =>
     isDesktopDeviceAndUp
       ? 60
@@ -152,15 +152,15 @@ const SingleCategoryDealsSection = ({ categoryName, list }) => {
   );
 };
 const CategoriesSection = ({ categories }) => {
-  console.log({ categories });
+  // console.log({ categories });
   // TODO: Browse products by category
-  console.log({ categories });
+  // console.log({ categories });
   const [activeItemIndex, setActiveItemIndex] = useState(0);
 
   const isWidthMoreThan550px = useMediaQuery("(min-width: 550px)");
   const isMediumDeviceAndUp = useMediaQuery("(min-width: 768px)");
   const isDesktopDeviceAndUp = useMediaQuery("(min-width: 1024px)");
-  console.log({ categories });
+  // console.log({ categories });
   const getChevronWidth = () =>
     isDesktopDeviceAndUp
       ? 60
@@ -263,7 +263,7 @@ const useGetDashboard = () => {
 
 const DashboardContainer = () => {
   const { data, error, isLoading } = useGetDashboard();
-  console.log({ data, error, isLoading });
+  // console.log({ data, error, isLoading });
 
   if (isLoading) {
     return <>Loading...</>;

@@ -58,7 +58,7 @@ const SingleDealContainer = () => {
   } = useRouter();
 
   const { data, error, isLoading } = useGetItemDetails(itemId);
-  console.log({ data, isLoading });
+  // console.log({ data, isLoading });
 
   // UI: create product image image UI
   // UI: create Likes Button

@@ -22,7 +22,15 @@ const getOrderDetails = async id => {
     window.location.replace(LOGIN_PAGE_URL);
   }
   return axios
-    .post(`${BASE_API_URL}getorderdetailsbyorderid`)
+    .post(
+      `${BASE_API_URL}getorderdetailsbyorderid`,
+      { orderId: id },
+      {
+        headers: {
+          Authorizer: accessToken,
+        },
+      }
+    )
     .then(({ data: { orderDetails }, status }) => {
       if (status === 401) {
         window.location.replace(LOGIN_PAGE_URL);
@@ -47,7 +55,7 @@ const SingleOrderContainer = () => {
   if (isLoading) {
     return <>Loading...</>;
   }
-  console.log({ data, isLoading });
+  // console.log({ data, isLoading });
   return (
     <Box>
       <Heading align="center">Order Details</Heading>

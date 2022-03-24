@@ -65,7 +65,7 @@ const SingleCategoryContainer = () => {
 
   // TODO: API: later add pagination
 
-  console.log({ data });
+  // console.log({ data });
 
   useEffect(() => {
     // TODO: handle incorrect category-name
@@ -77,7 +77,7 @@ const SingleCategoryContainer = () => {
     return <>Loading...</>;
   }
 
-  console.log({ data, m: page * ITEMS_PER_PAGE });
+  // console.log({ data, m: page * ITEMS_PER_PAGE });
 
   //  UI: Category Dynamic Heading
   //  create grid for products listing

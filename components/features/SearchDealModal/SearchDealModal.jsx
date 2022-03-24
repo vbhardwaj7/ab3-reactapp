@@ -40,7 +40,7 @@ const Row = ({
   handleItemClick,
 }) => {
   const { itemTitle, itemId } = data;
-  console.log({ isActive, index });
+  // console.log({ isActive, index });
 
   const handleClick = () => {
     handleItemClick(itemId);
@@ -122,7 +122,7 @@ const SearchDealModal = ({ isOpen, onClose }) => {
 
   const { data, isLoading } = useSearchDeals(debouncedSearch);
 
-  console.log({ debouncedSearch, data, isLoading });
+  // console.log({ debouncedSearch, data, isLoading });
 
   const handleChange = e => {
     setInput(e.target.value);
