@@ -1,5 +1,6 @@
 module.exports = {
   reactStrictMode: true,
+  trailingSlash: true,
   images: {
     domains: [
       "images-fe.ssl-images-amazon.com",

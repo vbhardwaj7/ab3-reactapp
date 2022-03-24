@@ -3,18 +3,6 @@ import { Image } from "components/data-display";
 import { Flex, Box, Heading, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
-/* 
-dealCategory: "Electronics"
-dealId: "01BX5ZZKBKACTAV9WEVGEMMVRY"
-dealPrice: "3"
-dealTitle: "15% off on Monitors"
-"imgUrl ": "https://images-fe.ssl-images-amazon.com/images/I/414e8Ntd7iL._AC_SX184_.jpg"
-itemId: "4"
-originalPrice: "5"
-
-
-*/
-
 // Styles
 const Card = props => (
   <Box
