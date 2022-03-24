@@ -95,19 +95,54 @@ const ProfileContainer = () => {
             <Text fontWeight="bold" align="left" w="80">
               Home Address
             </Text>
-            <Text align="left">{data?.address[0]?.addressName}</Text>
+            <Text align="left">
+              {data?.address?.homeAddresses?.map(address => {
+                return (
+                  <>
+                    {address.unit}
+                    <br />
+                    {address.street}
+                    <br />
+                    {address.city}
+                    <br />
+                    {address.country}
+                    <br />
+                    {address.zipCode}
+                    <br />
+                  </>
+                );
+              })}
+            </Text>
           </HStack>
           <HStack align="flex-start">
             <Text fontWeight="bold" align="left" w="80">
               Business Address
             </Text>
-            <Text align="left">{data?.address[1]?.businessAddress}</Text>
+            <Text align="left">
+              {" "}
+              {data?.address?.businessAddresses?.map(address => {
+                return (
+                  <>
+                    {address.unit}
+                    <br />
+                    {address.street}
+                    <br />
+                    {address.city}
+                    <br />
+                    {address.country}
+                    <br />
+                    {address.zipCode}
+                    <br />
+                  </>
+                );
+              })}
+            </Text>
           </HStack>
         </VStack>
       </VStack>
       <Flex justifyContent="center">
         <Button size="sm" onClick={handleLoggedInUsersClick} colorScheme="blue">
-          View Logged in Users
+          View Active Sessions
         </Button>
       </Flex>
     </Box>

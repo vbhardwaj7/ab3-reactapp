@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import {
   Box,
@@ -39,12 +40,7 @@ const TopBar = ({ onOpen }) => {
       justifyContent="space-between"
     >
       <Flex>
-        <MdFlight
-          onClick={goToHomePage}
-          fontSize="24px"
-          color="white"
-          cursor="pointer"
-        />
+        <img src="/logo.png" style={{ width: "40px" }} alt="logo" />
         <Heading
           onClick={goToHomePage}
           ml="2"
