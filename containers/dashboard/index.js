@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import ItemsCarousel from "react-items-carousel";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { BASE_API_URL, LOGIN_PAGE_URL } from "utils/constants";
 
 const Section = () => {
   // TODO: Section Component
@@ -226,9 +227,34 @@ const CategoriesSection = ({ categories }) => {
 };
 
 const getDashboard = async () => {
+  let accessToken = "";
+
+  // check for storage
+  accessToken = sessionStorage.getItem("accessToken");
+
+  // Check for url
+  if (window?.location?.hash) {
+    accessToken = window.location.hash.split("&")[1].split("=")[1];
+  }
+
+  if (!accessToken) {
+    window.location.replace(LOGIN_PAGE_URL);
+  }
+
   return axios
-    .get(`https://api.octank.click/getdashboard`)
-    .then(({ data }) => data);
+    .get(`${BASE_API_URL}getdashboard`, {
+      headers: {
+        Authorizer: accessToken,
+      },
+    })
+    .then(({ data, status }) => {
+      // check for 401
+      if (status === 401) {
+        window.location.replace(LOGIN_PAGE_URL);
+      } else {
+        return data;
+      }
+    });
 };
 
 const useGetDashboard = () => {

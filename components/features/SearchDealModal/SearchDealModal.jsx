@@ -20,6 +20,7 @@ import { ImSearch } from "react-icons/im";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { BASE_API_URL, LOGIN_PAGE_URL } from "utils/constants";
 
 const List = ({ children }) => {
   return (
@@ -75,10 +76,36 @@ const Row = ({
 };
 
 const searchDeals = async searchInput => {
-  // TODO: Use Search Input
+  let accessToken = "";
+
+  // check for storage
+  accessToken = sessionStorage.getItem("accessToken");
+
+  // Check for url
+  if (window?.location?.hash) {
+    accessToken = window.location.hash.split("&")[1].split("=")[1];
+  }
+
+  if (!accessToken) {
+    window.location.replace(LOGIN_PAGE_URL);
+  }
   return axios
-    .post(`https://api.octank.click/searchitems`)
-    .then(({ data: { searchResults } }) => searchResults);
+    .post(
+      `${BASE_API_URL}searchitems`,
+      { textToSearch: searchInput },
+      {
+        headers: {
+          Authorizer: accessToken,
+        },
+      }
+    )
+    .then(({ data: { searchResults }, status }) => {
+      if (status === 401) {
+        window.location.replace(LOGIN_PAGE_URL);
+      } else {
+        return searchResults;
+      }
+    });
 };
 
 const useSearchDeals = searchInput => {

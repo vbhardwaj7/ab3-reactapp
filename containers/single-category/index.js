@@ -4,13 +4,42 @@ import { Flex, Heading, Box, HStack, Button } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { DealCard } from "components/cards";
+import { BASE_API_URL, LOGIN_PAGE_URL } from "utils/constants";
 
 const getCategoryDeals = categoryId => {
+  let accessToken = "";
+
+  // check for storage
+  accessToken = sessionStorage.getItem("accessToken");
+
+  // Check for url
+  if (window?.location?.hash) {
+    accessToken = window.location.hash.split("&")[1].split("=")[1];
+  }
+
+  if (!accessToken) {
+    window.location.replace(LOGIN_PAGE_URL);
+  }
+
   // API: create API handler
   // TODO: API: support dynamic category
   return axios
-    .post(`https://api.octank.click/getitemsbycategory`, { categoryId })
-    .then(({ data: { itemsByCategory } }) => itemsByCategory);
+    .post(
+      `${BASE_API_URL}getitemsbycategory`,
+      { categoryId },
+      {
+        headers: {
+          Authorizer: accessToken,
+        },
+      }
+    )
+    .then(({ data: { itemsByCategory } }) => {
+      if (status === 401) {
+        window.location.replace(LOGIN_PAGE_URL);
+      } else {
+        return itemsByCategory;
+      }
+    });
 };
 
 const useGetCategoryDeals = categoryId => {
@@ -54,7 +83,7 @@ const SingleCategoryContainer = () => {
   //  create grid for products listing
   return (
     <>
-      <Heading align="center">{data ? data[0].dealCategory : ""}</Heading>
+      <Heading align="center">{data ? data[0].itemCategory : ""}</Heading>
       <Flex wrap="wrap" my={12}>
         {(data || [])
           .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)

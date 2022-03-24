@@ -3,13 +3,33 @@ import { Box, Heading, HStack, Text, VStack } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { BASE_API_URL, LOGIN_PAGE_URL } from "utils/constants";
 
 const List = props => <VStack mt="16" spacing="6" {...props} />;
 
 const getOrderDetails = async id => {
+  let accessToken = "";
+
+  // check for storage
+  accessToken = sessionStorage.getItem("accessToken");
+
+  // Check for url
+  if (window?.location?.hash) {
+    accessToken = window.location.hash.split("&")[1].split("=")[1];
+  }
+
+  if (!accessToken) {
+    window.location.replace(LOGIN_PAGE_URL);
+  }
   return axios
-    .post(`https://api.octank.click/getorderdetailsbyorderid`)
-    .then(({ data: { orderDetails } }) => orderDetails);
+    .post(`${BASE_API_URL}getorderdetailsbyorderid`)
+    .then(({ data: { orderDetails }, status }) => {
+      if (status === 401) {
+        window.location.replace(LOGIN_PAGE_URL);
+      } else {
+        return orderDetails;
+      }
+    });
 };
 
 const useGetOrderDetails = id => {
@@ -47,11 +67,7 @@ const SingleOrderContainer = () => {
               <Text fontWeight="bold">Quantity</Text>
             </HStack>
             {data?.map(item => (
-              <HStack
-                justifyContent="space-between"
-                w="97%"
-                key={item.orderId}
-              >
+              <HStack justifyContent="space-between" w="97%" key={item.orderId}>
                 <Text w="80">{item.itemTitle}</Text>
                 <Text>2</Text>
               </HStack>

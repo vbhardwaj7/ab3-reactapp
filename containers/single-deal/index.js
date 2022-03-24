@@ -5,25 +5,43 @@ import axios from "axios";
 import { Box, Button, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import { Image } from "components/data-display";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { BASE_API_URL, LOGIN_PAGE_URL } from "utils/constants";
 
 // TODO: API: integrate single deal API handler
 // TODO: API: remove mock data
-const getItemDetails = itemId =>
-  axios
-    .post(`https://api.octank.click/getitemdetails`, { itemId })
-    .then(({ data }) => ({
-      itemId: "28",
-      itemTitle: "Item Title 28",
-      itemDesc:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-      "imgUrl ":
-        "https://m.media-amazon.com/images/I/71eGb1FcyiL._AC_SL1500_.jpg",
-      originalPrice: "5",
-      dealPrice: "3",
-      itemCategory: "Office",
-      itemLikeCount: "300",
-    }));
+const getItemDetails = itemId => {
+  let accessToken = "";
 
+  // check for storage
+  accessToken = sessionStorage.getItem("accessToken");
+
+  // Check for url
+  if (window?.location?.hash) {
+    accessToken = window.location.hash.split("&")[1].split("=")[1];
+  }
+
+  if (!accessToken) {
+    window.location.replace(LOGIN_PAGE_URL);
+  }
+
+  return axios
+    .post(
+      `${BASE_API_URL}getitemdetails`,
+      { itemId },
+      {
+        headers: {
+          Authorizer: accessToken,
+        },
+      }
+    )
+    .then(({ data, status }) => {
+      if (status === 401) {
+        window.location.replace(LOGIN_PAGE_URL);
+      } else {
+        return data;
+      }
+    });
+};
 // TODO: API: integrate single deal API hook
 const useGetItemDetails = itemId => {
   return useQuery(["deal", itemId], () => getItemDetails(itemId), {
