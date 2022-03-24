@@ -21,8 +21,6 @@ const getCategoryDeals = categoryId => {
     window.location.replace(LOGIN_PAGE_URL);
   }
 
-  // API: create API handler
-  // TODO: API: support dynamic category
   return axios
     .post(
       `${BASE_API_URL}getitemsbycategory`,
@@ -33,7 +31,7 @@ const getCategoryDeals = categoryId => {
         },
       }
     )
-    .then(({ data: { itemsByCategory } }) => {
+    .then(({ data: { itemsByCategory }, status }) => {
       if (status === 401) {
         window.location.replace(LOGIN_PAGE_URL);
       } else {
@@ -43,7 +41,6 @@ const getCategoryDeals = categoryId => {
 };
 
 const useGetCategoryDeals = categoryId => {
-  // TODO: API: create API Hook
   return useQuery(
     ["category", categoryId],
     () => getCategoryDeals(categoryId),

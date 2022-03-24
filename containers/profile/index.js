@@ -10,12 +10,37 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { BASE_API_URL } from "utils/constants";
+import { BASE_API_URL, LOGIN_PAGE_URL } from "utils/constants";
 import { useRouter } from "next/router";
 
 const getUserProfile = () => {
-  // TODO: implement access token...
-  return axios.get(`${BASE_API_URL}getuserrecord`).then(({ data }) => data);
+  let accessToken = "";
+
+  // check for storage
+  accessToken = sessionStorage.getItem("accessToken");
+
+  // Check for url
+  if (window?.location?.hash) {
+    accessToken = window.location.hash.split("&")[1].split("=")[1];
+  }
+
+  if (!accessToken) {
+    window.location.replace(LOGIN_PAGE_URL);
+  }
+
+  return axios
+    .get(`${BASE_API_URL}getuserrecord`, {
+      headers: {
+        Authorizer: accessToken,
+      },
+    })
+    .then(({ data, status }) => {
+      if (status === 401) {
+        window.location.replace(LOGIN_PAGE_URL);
+      } else {
+        return data;
+      }
+    });
 };
 
 const useGetUserProfile = () => {

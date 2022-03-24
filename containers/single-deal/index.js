@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { Box, Button, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import { Image } from "components/data-display";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 import { BASE_API_URL, LOGIN_PAGE_URL } from "utils/constants";
 
 // TODO: API: integrate single deal API handler

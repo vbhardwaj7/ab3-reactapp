@@ -3,12 +3,12 @@ import { Box, Button, Heading, VStack, Flex } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { SessionCard } from "components/cards";
+import { BASE_API_URL, LOGIN_PAGE_URL } from "utils/constants";
 
 const List = props => <VStack mt="16" spacing="6" {...props} />;
 
 const getActiveSessions = async () => {
-  /* 
-let accessToken = "";
+  let accessToken = "";
 
   // check for storage
   accessToken = sessionStorage.getItem("accessToken");
@@ -20,18 +20,17 @@ let accessToken = "";
 
   if (!accessToken) {
     window.location.replace(LOGIN_PAGE_URL);
-  }  
-  */
+  }
 
   return axios
-    .get(`https://api.octank.click/getactivesessions`, {
+    .get(`${BASE_API_URL}getactivesessions`, {
       headers: {
-        // Authorizer: accessToken,
+        Authorizer: accessToken,
       },
     })
     .then(({ data: { activeSessions }, status }) => {
       if (status === 401) {
-        // window.location.replace(LOGIN_PAGE_URL);
+        window.location.replace(LOGIN_PAGE_URL);
       } else {
         return activeSessions;
       }
@@ -58,7 +57,9 @@ const SessionPage = () => {
         ))}
       </List>
       <Flex justifyContent="center" py="16">
-        <Button size="lg" colorScheme="red">Logout all Devices</Button>
+        <Button size="lg" colorScheme="red">
+          Logout all Devices
+        </Button>
       </Flex>
     </Box>
   );
