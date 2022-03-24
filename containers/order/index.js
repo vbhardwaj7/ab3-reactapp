@@ -37,8 +37,6 @@ const getOrders = () => {
 };
 
 const useGetOrders = () => {
-  // TODO: Attach auth token
-  // TODO: Handle 401 request
   return useQuery("getOrders", getOrders);
 };
 
