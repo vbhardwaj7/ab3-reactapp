@@ -22,6 +22,7 @@ const Image = props => {
         maxWidth: "100%",
         width: "100px",
         height: "100px",
+        ...props.style,
       }}
       {...props}
     />

@@ -49,9 +49,7 @@ const useGetItemDetails = itemId => {
   });
 };
 
-const CardImageContainer = props => (
-  <Box maxW="36" textAlign="center" {...props} />
-);
+const CardImageContainer = props => <Box textAlign="center" {...props} />;
 
 const SingleDealContainer = () => {
   // TODO: get deal id from URL
@@ -81,13 +79,17 @@ const SingleDealContainer = () => {
           alt={data?.itemTitle}
           width="100%"
           height="100%"
+          style={{
+            width: "300px",
+            height: "300px",
+          }}
         />
+        <Flex mt="4" mb="12" justifyContent="flex-end">
+          <Button colorScheme="blue" leftIcon={<AiOutlineHeart />}>
+            {data?.itemLikeCount}
+          </Button>
+        </Flex>
       </CardImageContainer>
-      <Flex mb="12" justify="flex-end">
-        <Button colorScheme="blue" leftIcon={<AiOutlineHeart />}>
-          {data?.itemLikeCount}
-        </Button>
-      </Flex>
       <VStack align="flex-start">
         <Text mb="-2" color="blue.600">
           {data?.itemCategory}
