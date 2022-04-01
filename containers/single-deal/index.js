@@ -75,7 +75,7 @@ const SingleDealContainer = () => {
     <VStack>
       <CardImageContainer>
         <Image
-          src={data?.["imgUrl "]}
+          src={data?.["imgURL "]}
           alt={data?.itemTitle}
           width="100%"
           height="100%"
