@@ -26,7 +26,7 @@ const getItemDetails = itemId => {
 
   return axios
     .post(
-      `${BASE_API_URL}getitemdetails`,
+      `${BASE_API_URL}put/getitem`,
       { itemId },
       {
         headers: {
