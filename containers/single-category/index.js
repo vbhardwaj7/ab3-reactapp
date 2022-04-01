@@ -23,7 +23,7 @@ const getCategoryDeals = categoryId => {
 
   return axios
     .post(
-      `${BASE_API_URL}getitemsbycategory`,
+      `${BASE_API_URL}put/getitemsbycategory`,
       { categoryId },
       {
         headers: {
