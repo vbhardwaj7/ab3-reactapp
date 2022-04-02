@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading, HStack, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, HStack, Spinner, Text, VStack } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -53,8 +53,24 @@ const SingleOrderContainer = () => {
 
   const { data, isLoading } = useGetOrderDetails(orderId);
   if (isLoading) {
-    return <>Loading...</>;
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="80vh"
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Box>
+    );
   }
+
   // console.log({ data, isLoading });
   return (
     <Box>

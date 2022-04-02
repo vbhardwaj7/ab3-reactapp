@@ -3,11 +3,13 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { DealCard } from "components/cards";
 import {
+  Box,
   Flex,
   Heading,
   IconButton,
   Skeleton,
   SkeletonCircle,
+  Spinner,
   Text,
   useMediaQuery,
   useTheme,
@@ -30,7 +32,7 @@ const DealOfDaySection = ({ deals }) => {
   // console.log({ deals });
   const getChevronWidth = () =>
     isDesktopDeviceAndUp
-      ? 60
+      ? 50
       : isMediumDeviceAndUp
       ? 40
       : isWidthMoreThan550px
@@ -38,7 +40,7 @@ const DealOfDaySection = ({ deals }) => {
       : 12;
   const getNumberOfCards = () =>
     isDesktopDeviceAndUp
-      ? 5
+      ? 4
       : isMediumDeviceAndUp
       ? 2
       : isWidthMoreThan550px
@@ -97,7 +99,7 @@ const SingleCategoryDealsSection = ({ categoryName, list }) => {
   // console.log({ list });
   const getChevronWidth = () =>
     isDesktopDeviceAndUp
-      ? 60
+      ? 50
       : isMediumDeviceAndUp
       ? 40
       : isWidthMoreThan550px
@@ -105,7 +107,7 @@ const SingleCategoryDealsSection = ({ categoryName, list }) => {
       : 12;
   const getNumberOfCards = () =>
     isDesktopDeviceAndUp
-      ? 5
+      ? 4
       : isMediumDeviceAndUp
       ? 2
       : isWidthMoreThan550px
@@ -163,7 +165,7 @@ const CategoriesSection = ({ categories }) => {
   // console.log({ categories });
   const getChevronWidth = () =>
     isDesktopDeviceAndUp
-      ? 60
+      ? 50
       : isMediumDeviceAndUp
       ? 40
       : isWidthMoreThan550px
@@ -171,7 +173,7 @@ const CategoriesSection = ({ categories }) => {
       : 12;
   const getNumberOfCards = () =>
     isDesktopDeviceAndUp
-      ? 5
+      ? 4
       : isMediumDeviceAndUp
       ? 2
       : isWidthMoreThan550px
@@ -263,10 +265,24 @@ const useGetDashboard = () => {
 
 const DashboardContainer = () => {
   const { data, error, isLoading } = useGetDashboard();
-  // console.log({ data, error, isLoading });
 
   if (isLoading) {
-    return <>Loading...</>;
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="80vh"
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Box>
+    );
   }
 
   return (

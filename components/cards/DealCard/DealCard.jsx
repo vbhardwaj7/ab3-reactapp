@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 // Styles
 const Card = props => (
   <Box
-    width="36"
+    width="56"
     height="100%"
     borderRadius="lg"
     textAlign="center"
@@ -18,9 +18,9 @@ const Card = props => (
     {...props}
   />
 );
-const CardImageContainer = props => (
-  <Box maxW="28" textAlign="center" {...props} />
-);
+
+// maxW="28"
+const CardImageContainer = props => <Box textAlign="center" {...props} />;
 const ContentContainer = props => <Box {...props} />;
 
 const DealCard = ({ deal, isCategory = false }) => {
@@ -35,20 +35,31 @@ const DealCard = ({ deal, isCategory = false }) => {
   };
   // console.log({ deal });
   return (
-    <Card onClick={redirectToSingleDealPage}>
+    <Card onClick={redirectToSingleDealPage} title={deal.dealTitle}>
       <CardImageContainer>
         <Image
-          src={deal["imgUrl "]}
+          src={deal["imgURL"] ? deal["imgURL"] : deal["imgUrl "]}
           alt={deal.dealTitle}
           width="100%"
           height="100%"
         />
       </CardImageContainer>
       <ContentContainer>
-        <Heading mt={2} size="sm" textAlign="left">
+        <Heading
+          sx={{
+            display: "-webkit-box",
+            maxWidth: "200px",
+            "-webkit-line-clamp": "2",
+            "-webkit-box-orient": "vertical",
+            overflow: "hidden",
+          }}
+          mt={2}
+          size="xs"
+          textAlign="left"
+        >
           {deal.dealTitle}
         </Heading>
-        {deal.originalPrice && (
+        {(deal.originalPrice || deal.itemPrice) && (
           <Flex alignItems="flex-end">
             <Text
               mb="1px"
@@ -56,7 +67,7 @@ const DealCard = ({ deal, isCategory = false }) => {
               textDecoration="line-through"
               fontSize="md"
             >
-              &nbsp;{deal.originalPrice}&nbsp;
+              &nbsp;{deal.originalPrice || deal.itemPrice}&nbsp;
             </Text>
             <Text mb="0" fontWeight="medium" color="blue.300" fontSize="lg">
               &nbsp;{deal.dealPrice}

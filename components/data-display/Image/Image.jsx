@@ -20,8 +20,8 @@ const Image = props => {
         padding: "0px",
         position: "relative",
         maxWidth: "100%",
-        width: "100px",
-        height: "100px",
+        width: "132px",
+        height: "132px",
         ...props.style,
       }}
       {...props}

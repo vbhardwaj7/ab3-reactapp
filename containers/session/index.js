@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Heading, VStack, Flex } from "@chakra-ui/react";
+import { Box, Button, Heading, VStack, Flex, Spinner } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { SessionCard } from "components/cards";
@@ -46,8 +46,24 @@ const SessionPage = () => {
   console.log({ data, isLoading });
 
   if (isLoading) {
-    return <>Loading...</>;
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="80vh"
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Box>
+    );
   }
+
   return (
     <Box>
       <Heading align="center">Active Sessions</Heading>

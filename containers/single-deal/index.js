@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { Box, Button, Flex, Heading, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Spinner,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { Image } from "components/data-display";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BASE_API_URL, LOGIN_PAGE_URL } from "utils/constants";
@@ -68,7 +76,22 @@ const SingleDealContainer = () => {
   // TODO: if 401, then send user to login page
 
   if (isLoading) {
-    return <>Loading...</>;
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="80vh"
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Box>
+    );
   }
 
   return (

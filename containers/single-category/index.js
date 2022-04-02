@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Flex, Heading, Box, HStack, Button } from "@chakra-ui/react";
+import { Flex, Heading, Box, HStack, Button, Spinner } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { DealCard } from "components/cards";
@@ -71,7 +71,22 @@ const SingleCategoryContainer = () => {
   // TODO: handle empty state
 
   if (isLoading) {
-    return <>Loading...</>;
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="80vh"
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Box>
+    );
   }
 
   // console.log({ data, m: page * ITEMS_PER_PAGE });

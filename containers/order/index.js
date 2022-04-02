@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { Box, Heading, VStack } from "@chakra-ui/react";
+import { Box, Heading, Spinner, VStack } from "@chakra-ui/react";
 import { OrderOverviewCard } from "components/cards";
 import { BASE_API_URL, LOGIN_PAGE_URL } from "utils/constants";
 
@@ -44,7 +44,22 @@ const OrdersContainer = () => {
   const { data, isLoading } = useGetOrders();
 
   if (isLoading) {
-    return <>Loading...</>;
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="80vh"
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Box>
+    );
   }
 
   // console.log({ data });
