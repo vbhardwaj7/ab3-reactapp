@@ -201,12 +201,11 @@ const SearchDealModal = ({ isOpen, onClose }) => {
               onChange={handleChange}
             />
             <InputRightElement
-              sx={{
-                alignItems: "center",
-                justifyContent: "middle",
-                height: "100%",
-                display: isLoading ? "flex" : "none",
-              }}
+              alignItems="center"
+              justifyContent="middle"
+              h="100%"
+              w="12"
+              display={isLoading ? "flex" : "none"}
               emptyColor="gray.200"
               color="blue.500"
             >

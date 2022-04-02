@@ -8,6 +8,7 @@ import {
   Heading,
   IconButton,
   Spinner,
+  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -54,6 +55,35 @@ const TopBar = ({ onOpen }) => {
         </Heading>
       </Flex>
       <Flex>
+        <Flex
+          align="center"
+          justify="space-between"
+          pl={2}
+          pr={3}
+          mr={4}
+          borderRadius={8}
+          bgColor="white"
+          width="17rem"
+          height="40px"
+          border="1px solid"
+          borderColor="gray.300"
+          cursor="pointer"
+          onClick={onOpen}
+        >
+          <Flex alignItems="center">
+            <ImSearch color="#0c5fad" />
+            <Text
+              ml={1}
+              mt={"2px"}
+              fontSize="sm"
+              color="gray.400"
+              userSelect="none"
+            >
+              Search
+            </Text>
+          </Flex>
+        </Flex>
+
         <IconButton
           variant="ghost"
           colorScheme="whiteAlpha"
@@ -72,14 +102,14 @@ const TopBar = ({ onOpen }) => {
           mr="1"
           onClick={goToOrders}
         />
-        <IconButton
+        {/* <IconButton
           variant="ghost"
           colorScheme="whiteAlpha"
           isRound
           aria-label="User"
           icon={<ImSearch color="white" />}
           onClick={onOpen}
-        />
+        /> */}
       </Flex>
     </Flex>
   );
