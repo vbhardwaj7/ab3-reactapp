@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   chakra,
@@ -7,6 +7,7 @@ import {
   Flex,
   Heading,
   IconButton,
+  Spinner,
   useDisclosure,
 } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -14,6 +15,7 @@ import { MdFlight } from "react-icons/md";
 import { ImSearch, ImCart, ImUser } from "react-icons/im";
 import { SearchDealModal } from "components/features";
 import { useRouter } from "next/router";
+import { LOGIN_PAGE_URL } from "utils/constants";
 
 const TopBar = ({ onOpen }) => {
   const { push } = useRouter();
@@ -125,10 +127,49 @@ const LayoutWrapper = ({ children }) => {
       })
   );
 
+  const [isAuth, setIsAuth] = useState(false);
+  useEffect(() => {
+    if (window?.location?.hash) {
+      sessionStorage.setItem(
+        "accessToken",
+        window.location.hash.split("&")[1].split("=")[1]
+      );
+      setIsAuth(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isAuth) {
+      if (sessionStorage?.getItem("accessToken")) {
+        setIsAuth(true);
+      } else {
+        window.location.replace(LOGIN_PAGE_URL);
+      }
+    }
+  }, [isAuth]);
+
   return (
     <ChakraProvider>
       <QueryClientProvider client={queryClient}>
-        <DashboardWrapper>{children}</DashboardWrapper>
+        {!isAuth ? (
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            height="100vh"
+            bgColor="blue.500"
+          >
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+          </Box>
+        ) : (
+          <DashboardWrapper>{children}</DashboardWrapper>
+        )}
       </QueryClientProvider>
     </ChakraProvider>
   );
