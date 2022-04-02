@@ -98,13 +98,16 @@ const SingleDealContainer = () => {
     <VStack>
       <CardImageContainer>
         <Image
-          src={data?.["imgURL "]}
+          src={data?.["imgURL "] ? data?.["imgURL "] : data?.["imgURL"]}
           alt={data?.itemTitle}
           width="100%"
           height="100%"
           style={{
+            maxWidth: "300px",
+            maxHeight: "300px",
             width: "300px",
             height: "300px",
+            objectFit: "contain",
           }}
         />
         <Flex mt="4" mb="12" justifyContent="flex-end">
@@ -117,7 +120,7 @@ const SingleDealContainer = () => {
         <Text mb="-2" color="blue.600">
           {data?.itemCategory}
         </Text>
-        <Heading size="2xl">{data?.itemTitle}</Heading>
+        <Heading fontSize="lg">{data?.itemTitle}</Heading>
         <Text>{data?.itemDesc}</Text>
       </VStack>
     </VStack>

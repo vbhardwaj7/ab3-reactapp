@@ -13,6 +13,8 @@ import {
   SkeletonCircle,
   Input,
   InputGroup,
+  InputRightElement,
+  Spinner,
 } from "@chakra-ui/react";
 // import { useForm } from "react-hook-form";
 import useDebounce from "hooks/use-debounce";
@@ -198,13 +200,25 @@ const SearchDealModal = ({ isOpen, onClose }) => {
               value={input}
               onChange={handleChange}
             />
+            <InputRightElement
+              sx={{
+                alignItems: "center",
+                justifyContent: "middle",
+                height: "100%",
+                display: isLoading ? "flex" : "none",
+              }}
+              emptyColor="gray.200"
+              color="blue.500"
+            >
+              <Spinner />
+            </InputRightElement>
           </InputGroup>
           <Box
             background="white"
             zIndex={1500}
             marginTop={"-8px"}
             paddingTop="8px"
-            // display={isLoading || (data && data.length > 0) ? "block" : "none"}
+            display={isLoading || (data && data.length > 0) ? "block" : "none"}
           >
             <List>
               <Divider w="95%" background="gray.300" h="1px" margin="0 auto" />
