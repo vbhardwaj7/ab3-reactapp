@@ -39,6 +39,9 @@ const getOrderDetails = async id => {
       } else {
         return orderDetails;
       }
+    })
+    .catch(err => {
+      window.location.replace(LOGIN_PAGE_URL);
     });
 };
 

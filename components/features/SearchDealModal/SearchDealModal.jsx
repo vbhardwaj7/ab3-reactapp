@@ -107,6 +107,9 @@ const searchDeals = async searchInput => {
       } else {
         return searchResults;
       }
+    })
+    .catch(err => {
+      window.location.replace(LOGIN_PAGE_URL);
     });
 };
 

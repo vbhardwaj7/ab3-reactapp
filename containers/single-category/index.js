@@ -37,6 +37,9 @@ const getCategoryDeals = categoryId => {
       } else {
         return itemsByCategory;
       }
+    })
+    .catch(err => {
+      window.location.replace(LOGIN_PAGE_URL);
     });
 };
 

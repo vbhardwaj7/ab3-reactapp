@@ -34,6 +34,9 @@ const getActiveSessions = async () => {
       } else {
         return activeSessions;
       }
+    })
+    .catch(err => {
+      window.location.replace(LOGIN_PAGE_URL);
     });
 };
 

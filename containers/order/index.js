@@ -33,6 +33,9 @@ const getOrders = () => {
       } else {
         return orderHistory;
       }
+    })
+    .catch(err => {
+      window.location.replace(LOGIN_PAGE_URL);
     });
 };
 

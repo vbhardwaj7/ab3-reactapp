@@ -41,6 +41,9 @@ const getUserProfile = () => {
       } else {
         return data;
       }
+    })
+    .catch(err => {
+      window.location.replace(LOGIN_PAGE_URL);
     });
 };
 

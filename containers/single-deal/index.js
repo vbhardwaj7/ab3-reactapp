@@ -48,6 +48,9 @@ const getItemDetails = itemId => {
       } else {
         return data;
       }
+    })
+    .catch(err => {
+      window.location.replace(LOGIN_PAGE_URL);
     });
 };
 // TODO: API: integrate single deal API hook

@@ -79,7 +79,7 @@ const DealOfDaySection = ({ deals }) => {
           outsideChevron
           chevronWidth={getChevronWidth()}
         >
-          {deals.map(deal => (
+          {deals?.map(deal => (
             <DealCard key={deal.itemId} deal={deal} />
           ))}
         </ItemsCarousel>
@@ -145,7 +145,7 @@ const SingleCategoryDealsSection = ({ categoryName, list }) => {
           outsideChevron
           chevronWidth={getChevronWidth()}
         >
-          {list[0].map(deal => (
+          {list[0]?.map(deal => (
             <DealCard key={deal.itemId} deal={deal} />
           ))}
         </ItemsCarousel>
@@ -211,7 +211,7 @@ const CategoriesSection = ({ categories }) => {
           outsideChevron
           chevronWidth={getChevronWidth()}
         >
-          {categories.map(deal => (
+          {categories?.map(deal => (
             <DealCard
               key={deal.categoryId}
               deal={{
@@ -251,11 +251,15 @@ const getDashboard = async () => {
     })
     .then(({ data, status }) => {
       // check for 401
+      console.log({ status, data });
       if (status === 401) {
         window.location.replace(LOGIN_PAGE_URL);
       } else {
         return data;
       }
+    })
+    .catch(err => {
+      window.location.replace(LOGIN_PAGE_URL);
     });
 };
 
@@ -287,8 +291,8 @@ const DashboardContainer = () => {
 
   return (
     <>
-      <DealOfDaySection deals={data.dealsOfTheDay} />
-      {data.dealsByCategory.map(category => {
+      <DealOfDaySection deals={data?.dealsOfTheDay} />
+      {data?.dealsByCategory.map(category => {
         let categoryName = "";
         const list = [];
         Object.keys(category).forEach(c => {
@@ -303,7 +307,7 @@ const DashboardContainer = () => {
           />
         );
       })}
-      <CategoriesSection categories={data.dealCategories} />
+      <CategoriesSection categories={data?.dealCategories} />
     </>
   );
 };

@@ -30,6 +30,9 @@ const getAddresses = () => {
       } else {
         return data;
       }
+    })
+    .catch(err => {
+      window.location.replace(LOGIN_PAGE_URL);
     });
 };
 const useGetAddresses = () => {
