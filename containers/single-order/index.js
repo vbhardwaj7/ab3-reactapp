@@ -4,6 +4,8 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { BASE_API_URL, LOGIN_PAGE_URL } from "utils/constants";
+import { Image } from "components/data-display";
+import Link from "next/link";
 
 const List = props => <VStack mt="16" spacing="6" {...props} />;
 
@@ -83,19 +85,90 @@ const SingleOrderContainer = () => {
           bgColor="transparent"
           border="1px solid black"
         >
-          <VStack align="flex-start">
+          <VStack align="flex-start" rowGap="8">
             <HStack>
-              <Text fontWeight="bold" w="80">
-                Name
-              </Text>
-              <Text fontWeight="bold">Quantity</Text>
+              <Text fontWeight="bold" w="10"></Text>
+              <Text fontWeight="bold" w="60"></Text>
+              <Text fontWeight="bold" w="60"></Text>
+              <Text fontWeight="bold" w="60"></Text>
             </HStack>
-            {data?.map(item => (
-              <HStack justifyContent="space-between" w="97%" key={item.orderId}>
-                <Text w="80">{item.itemTitle}</Text>
-                <Text>2</Text>
-              </HStack>
-            ))}
+            {data?.map(
+              (item, index) =>
+                console.log({ item }) || (
+                  <HStack
+                    justifyContent="space-between"
+                    w="97%"
+                    key={item.orderId}
+                    title={item.itemTitle}
+                    // my="20"
+                  >
+                    <Image
+                      src={item["imgURL "]}
+                      alt={item.itemTitle}
+                      width="100%"
+                      height="100%"
+                    />
+                    <Link href={`/deal/${item["itemId"]}`}>
+                      <Text
+                        w="220px"
+                        // marginLeft="auto"
+                        sx={{
+                          display: "-webkit-box",
+                          maxWidth: "200px",
+                          "-webkit-line-clamp": "2",
+                          "-webkit-box-orient": "vertical",
+                          overflow: "hidden",
+                        }}
+                        color="blue.500"
+                        cursor="pointer"
+                        _hover={{
+                          textDecoration: "underline",
+                        }}
+                      >
+                        {item.itemTitle}
+                      </Text>
+                    </Link>
+                    <Text
+                      sx={
+                        index === 0
+                          ? {
+                              "&::after": {
+                                content: '"Count"',
+                                display: "block",
+                                width: "200px",
+                                position: "absolute",
+                                top: "-80px",
+                                left: "-12px",
+                              },
+                            }
+                          : {}
+                      }
+                      position="relative"
+                    >
+                      2
+                    </Text>
+                    <Text
+                      sx={
+                        index === 0
+                          ? {
+                              "&::after": {
+                                content: '"Quantity"',
+                                display: "block",
+                                width: "200px",
+                                position: "absolute",
+                                top: "-80px",
+                                left: "-12px",
+                              },
+                            }
+                          : {}
+                      }
+                      position="relative"
+                    >
+                      {item.itemPrice}
+                    </Text>
+                  </HStack>
+                )
+            )}
           </VStack>
         </Box>
       </List>

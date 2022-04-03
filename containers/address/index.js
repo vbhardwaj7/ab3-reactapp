@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, HStack, Spinner, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -24,11 +24,11 @@ const getAddresses = () => {
         Authorizer: accessToken,
       },
     })
-    .then(({ data: { orderHistory }, status }) => {
+    .then(({ data, status }) => {
       if (status === 401) {
         window.location.replace(LOGIN_PAGE_URL);
       } else {
-        return orderHistory;
+        return data;
       }
     });
 };
@@ -38,12 +38,30 @@ const useGetAddresses = () => {
 
 const AddressContainer = () => {
   const { data, isLoading } = useGetAddresses();
-  console.log({ data, isLoading });
+
+  if (isLoading) {
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="40vh"
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Box>
+    );
+  }
 
   return (
     <Box>
       <Heading align="center">Address</Heading>
-      {/* <VStack spacing="4" align="center" my="28" mx="auto" maxW="container.md">
+      <VStack spacing="4" align="center" my="28" mx="auto" maxW="container.md">
         <VStack align="flex-start">
           <HStack align="flex-start">
             <Text fontWeight="bold" align="left" w="80">
@@ -52,7 +70,7 @@ const AddressContainer = () => {
             <Text align="left">
               {data?.address?.homeAddresses?.map(address => {
                 return (
-                  <>
+                  <div key={address.zipCode}>
                     {address.unit}
                     <br />
                     {address.street}
@@ -63,7 +81,7 @@ const AddressContainer = () => {
                     <br />
                     {address.zipCode}
                     <br />
-                  </>
+                  </div>
                 );
               })}
             </Text>
@@ -76,7 +94,7 @@ const AddressContainer = () => {
               {" "}
               {data?.address?.businessAddresses?.map(address => {
                 return (
-                  <>
+                  <div key={address.zipCode}>
                     {address.unit}
                     <br />
                     {address.street}
@@ -87,13 +105,13 @@ const AddressContainer = () => {
                     <br />
                     {address.zipCode}
                     <br />
-                  </>
+                  </div>
                 );
               })}
             </Text>
           </HStack>
         </VStack>
-      </VStack> */}
+      </VStack>
     </Box>
   );
 };

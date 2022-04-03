@@ -49,7 +49,7 @@ const OrdersContainer = () => {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        height="80vh"
+        height="40vh"
       >
         <Spinner
           thickness="4px"

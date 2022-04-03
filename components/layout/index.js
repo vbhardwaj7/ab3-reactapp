@@ -30,7 +30,7 @@ const TopBar = ({ onOpen }) => {
   };
 
   const goToProfile = () => {
-    push(`/user/profile`);
+    push(`/user`);
   };
 
   return (
@@ -93,7 +93,7 @@ const TopBar = ({ onOpen }) => {
           mr="1"
           onClick={goToProfile}
         />
-        <IconButton
+        {/*  <IconButton
           variant="ghost"
           colorScheme="whiteAlpha"
           isRound
@@ -101,7 +101,7 @@ const TopBar = ({ onOpen }) => {
           icon={<ImCart color="white" />}
           mr="1"
           onClick={goToOrders}
-        />
+        /> */}
         {/* <IconButton
           variant="ghost"
           colorScheme="whiteAlpha"
