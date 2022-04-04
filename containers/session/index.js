@@ -19,24 +19,24 @@ const getActiveSessions = async () => {
   }
 
   if (!accessToken) {
-    window.location.replace(LOGIN_PAGE_URL);
+    window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
   }
 
   return axios
-    .get(`${BASE_API_URL}getactivesessions`, {
+    .get(`${process.env.NEXT_PUBLIC_API_URL}getactivesessions`, {
       headers: {
         Authorizer: accessToken,
       },
     })
     .then(({ data: { activeSessions }, status }) => {
       if (status === 401) {
-        window.location.replace(LOGIN_PAGE_URL);
+        window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
       } else {
         return activeSessions;
       }
     })
     .catch(err => {
-      window.location.replace(LOGIN_PAGE_URL);
+      window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
     });
 };
 

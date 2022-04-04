@@ -21,11 +21,11 @@ const getOrderDetails = async id => {
   }
 
   if (!accessToken) {
-    window.location.replace(LOGIN_PAGE_URL);
+    window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
   }
   return axios
     .post(
-      `${BASE_API_URL}getorderdetailsbyorderid`,
+      `${process.env.NEXT_PUBLIC_API_URL}getorderdetailsbyorderid`,
       { orderId: id },
       {
         headers: {
@@ -35,13 +35,13 @@ const getOrderDetails = async id => {
     )
     .then(({ data: { orderDetails }, status }) => {
       if (status === 401) {
-        window.location.replace(LOGIN_PAGE_URL);
+        window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
       } else {
         return orderDetails;
       }
     })
     .catch(err => {
-      window.location.replace(LOGIN_PAGE_URL);
+      window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
     });
 };
 

@@ -89,11 +89,11 @@ const searchDeals = async searchInput => {
   }
 
   if (!accessToken) {
-    window.location.replace(LOGIN_PAGE_URL);
+    window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
   }
   return axios
     .post(
-      `${BASE_API_URL}searchitems`,
+      `${process.env.NEXT_PUBLIC_API_URL}searchitems`,
       { textToSearch: searchInput },
       {
         headers: {
@@ -103,13 +103,13 @@ const searchDeals = async searchInput => {
     )
     .then(({ data: { searchResults }, status }) => {
       if (status === 401) {
-        window.location.replace(LOGIN_PAGE_URL);
+        window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
       } else {
         return searchResults;
       }
     })
     .catch(err => {
-      window.location.replace(LOGIN_PAGE_URL);
+      window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
     });
 };
 

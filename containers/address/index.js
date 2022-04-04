@@ -16,23 +16,23 @@ const getAddresses = () => {
   }
 
   if (!accessToken) {
-    window.location.replace(LOGIN_PAGE_URL);
+    window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
   }
   return axios
-    .get(`${BASE_API_URL}getuseraddress`, {
+    .get(`${process.env.NEXT_PUBLIC_API_URL}getuseraddress`, {
       headers: {
         Authorizer: accessToken,
       },
     })
     .then(({ data, status }) => {
       if (status === 401) {
-        window.location.replace(LOGIN_PAGE_URL);
+        window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
       } else {
         return data;
       }
     })
     .catch(err => {
-      window.location.replace(LOGIN_PAGE_URL);
+      window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
     });
 };
 const useGetAddresses = () => {

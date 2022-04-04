@@ -173,7 +173,7 @@ const LayoutWrapper = ({ children }) => {
       if (sessionStorage?.getItem("accessToken")) {
         setIsAuth(true);
       } else {
-        window.location.replace(LOGIN_PAGE_URL);
+        window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
       }
     }
   }, [isAuth]);

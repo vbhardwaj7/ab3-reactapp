@@ -240,11 +240,11 @@ const getDashboard = async () => {
   }
 
   if (!accessToken) {
-    window.location.replace(LOGIN_PAGE_URL);
+    window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
   }
 
   return axios
-    .get(`${BASE_API_URL}getdashboard`, {
+    .get(`${process.env.NEXT_PUBLIC_API_URL}getdashboard`, {
       headers: {
         Authorizer: accessToken,
       },
@@ -253,13 +253,13 @@ const getDashboard = async () => {
       // check for 401
       console.log({ status, data });
       if (status === 401) {
-        window.location.replace(LOGIN_PAGE_URL);
+        window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
       } else {
         return data;
       }
     })
     .catch(err => {
-      window.location.replace(LOGIN_PAGE_URL);
+      window.location.replace(process.env.NEXT_PUBLIC_LOGIN_PAGE_URL);
     });
 };
 
